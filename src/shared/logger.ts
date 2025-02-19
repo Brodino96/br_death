@@ -1,4 +1,4 @@
-import { debugMode } from "../../public/config.json"
+import { debugMode } from "../config.json"
 
 export class Logger {
     public async error(txt: string, bypass?: boolean) {

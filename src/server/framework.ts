@@ -1,39 +1,25 @@
-abstract class Framework {
-    static resourceName: string;
-    abstract getIdentifier(id: number): string;
+import { Server as ESXServer } from 'esx.js'
 
-    static getResourceName(): string {
-        throw new Error("getResourceName must be implemented by subclasses");
-    }
-
-    static isPresent(): boolean {
-        return GetResourceState(this.resourceName) !== "missing";
-    }
+interface FrameworkInterface {
+    getIdentifier(id: number): string
 }
-  
-class EsxFramework extends Framework {
-    static resourceName = "es_extxended";
-    private ESX: any;
+
+class EsxFramework implements FrameworkInterface {
+    private ESX: ESXServer
 
     constructor() {
-        super();
-        this.ESX = exports[EsxFramework.resourceName].getSharedObject();
+        this.ESX = exports["es_extended"].getSharedObject()
     }
 
     public getIdentifier(id: number): string {
-        return this.ESX.GetPlayerFromId(id).getIdentifier();
+        return this.ESX.GetPlayerFromId(id).getIdentifier()
     }
 }
 
-// Framework detection logic
-function getFramework(): Framework {
-    const frameworks: ((new () => Framework) & typeof Framework)[] = [EsxFramework];
-
-    for (const framework of frameworks) {
-        if (framework.isPresent()) {
-            return new framework();
-        }
+export function getFramework(): FrameworkInterface {
+    if (GetResourceState("es_extended") != "missing") {
+        return new EsxFramework()
+    } else {
+        throw Error("No supported framework ")
     }
-
-    throw new Error("No supported framework is present");
 }
