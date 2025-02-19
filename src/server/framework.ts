@@ -1,4 +1,4 @@
-import { Server as ESXServer } from 'esx.js'
+import { Server as ESXServer } from "esx.js"
 
 interface FrameworkInterface {
     getIdentifier(id: number): string

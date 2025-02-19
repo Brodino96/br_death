@@ -1,10 +1,7 @@
-import { DB } from "./database"
+import { Config } from "../shared/config"
 import { Logger } from "../shared/logger"
 import { getFramework } from "./framework"
-import type { ScriptConfig } from "../types"
-
-const jsonData = LoadResourceFile(GetCurrentResourceName(), "./config.json")
-const Config: ScriptConfig = JSON.parse(jsonData)
+import { DB } from "./database"
 
 const db = new DB()
 const framework = getFramework()

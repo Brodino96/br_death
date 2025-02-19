@@ -1,9 +1,6 @@
-import { Blip, Fading, Ped, Player, Sprite, Vector3 } from "@nativewrappers/fivem"
-import type { ScriptConfig } from "../types"
+import { Blip, Fading, Player, Vector3 } from "@nativewrappers/fivem"
 import { Logger } from "../shared/logger"
-
-const jsonData = LoadResourceFile(GetCurrentResourceName(), "./config.json")
-const Config: ScriptConfig = JSON.parse(jsonData)
+import { Config } from "../shared/config"
 
 const logger = new Logger()
 
@@ -96,3 +93,9 @@ class Main {
         }
     }
 }
+
+function init() {
+    return new Main()
+}
+
+init()
